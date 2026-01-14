@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 馬年春節孝親之旅 - 數位導覽</title>
+    <meta name="description" content="北投陽明山春節家庭旅遊數位導覽，4天3夜完整行程規劃">
+
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="馬年行程">
+    <meta name="theme-color" content="#FF3B30">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Favicon (placeholder - replace with actual icons) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏮</text></svg>">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/css/variables.css">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+</head>
+
+<body>
+    <!-- Error Toast (for error notifications) -->
+    <div id="error-toast" class="error-toast" role="alert" aria-live="polite"></div>
+
+    <div class="container" id="top">
+        <header>
+            <h1>2026 馬年春節孝親之旅</h1>
+            <p class="header-sub">Beitou & Yangmingshan Premium Digital Guide</p>
+        </header>
+
+        <!-- Intelligent Dashboard -->
+        <div class="dashboard">
+            <div class="dash-card">
+                <span class="dash-label">春節倒數</span>
+                <span class="dash-value" id="countdown-timer">--</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">即時感溫</span>
+                <span class="dash-value" id="current-temp">--°C</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">全台人潮</span>
+                <span class="dash-value" id="crowd-level-dash" style="color: #faad14;">計算中</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">今日建議步數</span>
+                <span class="dash-value" id="step-target">~4,500</span>
+            </div>
+        </div>
+
+        <!-- Day 1 -->
+        <section class="day-section" id="day1">
+            <span class="day-label">DAY 01</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">🏮 關渡祈福 & 三層崎花海</span>
+                    <span class="card-date">Feb 17, 2026 (初一)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">09:30</div>
+                    <div class="event-content">
+                        <span class="event-name">關渡宮走春祈福</span>
+                        <p class="dash-label">建議長輩宮門口先下車，車輛停水岸停車場。</p>
+                        <div class="pill-group">
+                            <span class="pill hot">🔥 建議提早</span>
+                            <span class="pill info">🚗 側門好轉入</span>
+                        </div>
+                        <div class="crowd-bar">
+                            <div class="crowd-fill fill-med"></div>
+                        </div>
+                        <p style="font-size: 0.7rem; color: #999; margin-top: 5px;">📍 人潮壓力：中等（11:00 前）</p>
+                    </div>
+                </div>
+
+                <div class="event" style="background: rgba(255,215,0,0.03);">
+                    <div class="event-time">14:30</div>
+                    <div class="event-content">
+                        <span class="event-name">北投三層崎公園（新亮點）</span>
+                        <p class="dash-label">台版富良野花海。有無障礙坡道，長輩拍照完全免用力。</p>
+                        <div class="pill-group">
+                            <span class="pill recommend">🌸 2026 花季限定</span>
+                            <span class="pill recommend">♿ 全程無障礙</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">16:30</div>
+                    <div class="event-content">
+                        <span class="event-name">飯店 Check-in & 新北投漫步</span>
+                        <p class="dash-label">泉都溫泉會館，鄰近捷運站與星巴克。</p>
+                        <div class="details-group">
+                            <div class="detail-row"><span class="tag tips">散步</span>新北投車站（百年木造）至北投公園，路徑全平坦。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 2 -->
+        <section class="day-section" id="day2">
+            <span class="day-label">DAY 02</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">🌸 陽明山花季 & 頂級森林浴</span>
+                    <span class="card-date">Feb 18, 2026 (初二)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">09:00</div>
+                    <div class="event-content">
+                        <span class="event-name">前往陽明山（花鐘區）</span>
+                        <p class="dash-label">初二回娘家車潮巔峰。強力建議預約包車或計程車。</p>
+                        <div class="pill-group">
+                            <span class="pill hot">⚠️ 行車嚴重管制</span>
+                        </div>
+                        <div class="crowd-bar">
+                            <div class="crowd-fill fill-high"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event" style="background: rgba(82,196,26,0.03);">
+                    <div class="event-time">10:30</div>
+                    <div class="event-content">
+                        <span class="event-name">二子坪步道（森林浴首選）</span>
+                        <p class="dash-label">全台環境最友善步道，純平緩路段，無階梯。</p>
+                        <div class="pill-group">
+                            <span class="pill recommend">✨ 養生慢行</span>
+                            <span class="pill recommend">🌳 空氣極佳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">18:00</div>
+                    <div class="event-content">
+                        <span class="event-name">晚餐：二空眷村小館</span>
+                        <p class="dash-label">道地眷村家鄉味，長輩最愛適口性。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 3 -->
+        <section class="day-section" id="day3">
+            <span class="day-label">DAY 03</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">🌅 淡水夕陽 & 頂級名廚盛宴</span>
+                    <span class="card-date">Feb 19, 2026 (初三)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">11:00</div>
+                    <div class="event-content">
+                        <span class="event-name">新上享港式飲茶（2026已確認）</span>
+                        <p class="dash-label">春節正常營業，精選港點，家族圍爐首選。</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">13:30</div>
+                    <div class="event-content">
+                        <span class="event-name">淡水漁人碼頭（避暑觀景）</span>
+                        <p class="dash-label">直接停福容飯店地下室，電梯直達，無需遠行。</p>
+                        <div class="pill-group">
+                            <span class="pill info">📍 最佳撤退：16:15 分</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event" style="background: rgba(192,57,43,0.03);">
+                    <div class="event-time">18:00</div>
+                    <div class="event-content">
+                        <span class="event-name">晚餐：大地酒店 奇岩一號</span>
+                        <p class="dash-label">川湘名菜：剁椒魚頭、稻香牛。此行最高規格總結。</p>
+                        <div class="pill-group">
+                            <span class="pill hot">🏆 必點經典</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 4 -->
+        <section class="day-section" id="day4">
+            <span class="day-label">DAY 04</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">♨️ 名湯巡禮 & 暖心返程</span>
+                    <span class="card-date">Feb 20, 2026 (初四)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">11:30</div>
+                    <div class="event-content">
+                        <span class="event-name">復興公園泡腳池 (足湯)</span>
+                        <p class="dash-label">北投最高級的免費公立足湯，木造日式氛圍極佳。</p>
+                        <div class="details-group">
+                            <div class="detail-row"><span class="tag transport">便利</span>就在捷運新北投站旁，離停車場也近。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">13:30</div>
+                    <div class="event-content">
+                        <span class="event-name">返程：走台 64 線</span>
+                        <p class="dash-label">避開市區，快速接往新莊。</p>
+                        <div class="details-group">
+                            <div class="detail-row"><span class="tag alert">時機</span>14:00 前上路，避開初四收假收尾車潮。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 家庭春節專屬導覽 | Designed for Comfort</p>
+            <div class="cny-badge">祝全家 馬年大吉，平安喜樂</div>
+        </footer>
+    </div>
+
+    <!-- Intelligent Bottom Navigation -->
+    <nav class="smart-nav" aria-label="日期導航">
+        <a href="#day1">17</a>
+        <a href="#day2">18</a>
+        <a href="#day3">19</a>
+        <a href="#day4">20</a>
+        <a href="#top" aria-label="回到頂部">↑</a>
+    </nav>
+
+    <!-- Application Script -->
+    <script type="module" src="src/js/app.js"></script>
+</body>
+
+</html>

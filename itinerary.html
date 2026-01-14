@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 馬年春節孝親之旅 - 數位導覽</title>
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="馬年行程">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3B30;
+            /* 現代活力紅 */
+            --primary-gradient: linear-gradient(135deg, #FF3B30 0%, #AF1D1D 100%);
+            --accent: #FFD700;
+            --bg-base: #f8f9fa;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-card: rgba(255, 255, 255, 0.85);
+            --blur: 12px;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.04);
+            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(255, 59, 48, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 215, 0, 0.05) 0px, transparent 50%);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 120px;
+            /* Space for bottom nav */
+        }
+
+        /* Modern Header */
+        header {
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-sub {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Smart Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 20px 0 35px;
+        }
+
+        .dash-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(var(--blur));
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-glass);
+            text-align: center;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .dash-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dash-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .dash-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Floating Nav */
+        .smart-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 10px 25px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .smart-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 10px 15px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .smart-nav a.active,
+        .smart-nav a:hover {
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+        }
+
+        /* Day Card */
+        .day-section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s ease-out;
+        }
+
+        .day-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .day-label {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 59, 48, 0.2);
+        }
+
+        .itinerary-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(var(--blur));
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-glass);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .card-header {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-date {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Timeline Items */
+        .event {
+            display: flex;
+            padding: 25px 30px;
+            gap: 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+
+        .event:last-child {
+            border-bottom: none;
+        }
+
+        .event-time {
+            flex: 0 0 70px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111;
+            display: block;
+        }
+
+        /* Status Pills */
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .pill.hot {
+            background: #fff1f0;
+            color: #ff4d4f;
+            border-color: #ffccc7;
+        }
+
+        .pill.recommend {
+            background: #f6ffed;
+            color: #52c41a;
+            border-color: #b7eb8f;
+        }
+
+        .pill.info {
+            background: #e6f7ff;
+            color: #1890ff;
+            border-color: #91d5ff;
+        }
+
+        /* Intelligent Indicator */
+        .crowd-bar {
+            width: 100%;
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            margin-top: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .crowd-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .fill-low {
+            background: #52c41a;
+            width: 25%;
+        }
+
+        .fill-med {
+            background: #faad14;
+            width: 60%;
+        }
+
+        .fill-high {
+            background: #ff4d4f;
+            width: 95%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .cny-badge {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .smart-nav {
+                width: 90%;
+                gap: 5px;
+                padding: 10px;
+                bottom: 20px;
+            }
+
+            .smart-nav a {
+                font-size: 0.75rem;
+                padding: 8px 10px;
+            }
+
+            .event {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+            }
+
+            .event-time {
+                font-size: 1.1rem;
+            }
+
+            .card-header {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="top">
+        <header>
+            <h1>2026 馬年春節孝親之旅</h1>
+            <p class="header-sub">Beitou & Yangmingshan Premium Digital Guide</p>
+        </header>
+
+        <!-- Intelligent Dashboard -->
+        <div class="dashboard">
+            <div class="dash-card">
+                <span class="dash-label">春節倒數</span>
+                <span class="dash-value" id="countdown-timer">--</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">即時感溫</span>
+                <span class="dash-value" id="current-temp">15°C</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">全台人潮性</span>
+                <span class="dash-value" id="crowd-level-dash" style="color: #faad14;">計算中</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">今日建議步數</span>
+                <span class="dash-value" id="step-target">~4,500</span>
+            </div>
+        </div>
+
+        <!-- Day 1 -->
+        <section class="day-section" id="day1">
+            <span class="day-label">DAY 01</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">🏮 關渡祈福 & 三層崎花海</span>
+                    <span class="card-date">Feb 17, 2026 (初一)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">09:30</div>
+                    <div class="event-content">
+                        <span class="event-name">關渡宮走春祈福</span>
+                        <p class="dash-label">建議長輩宮門口先下車，車輛停水岸停車場。</p>
+                        <div class="pill-group">
+                            <span class="pill hot">🔥 建議提早</span>
+                            <span class="pill info">🚗 側門好轉入</span>
+                        </div>
+                        <div class="crowd-bar">
+                            <div class="crowd-fill fill-med"></div>
+                        </div>
+                        <p style="font-size: 0.7rem; color: #999; margin-top: 5px;">📍 人潮壓力：中等（11:00 前）</p>
+                    </div>
+                </div>
+
+                <div class="event" style="background: rgba(255,215,0,0.03);">
+                    <div class="event-time">14:30</div>
+                    <div class="event-content">
+                        <span class="event-name">北投三層崎公園（新亮點）</span>
+                        <p class="dash-label">台版富良野花海。有無障礙坡道，長輩拍照完全免用力。</p>
+                        <div class="pill-group">
+                            <span class="pill recommend">🌸 2026 花季限定</span>
+                            <span class="pill recommend">♿ 全程無障礙</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">16:30</div>
+                    <div class="event-content">
+                        <span class="activity">飯店 Check-in & 新北投漫步</span>
+                        <div class="details-group">
+                            <div class="detail-row"><span class="tag transport">抵達</span>泉都溫泉會館，鄰近捷運站與星巴克。</div>
+                            <div class="detail-row"><span class="tag tips">散步</span>新北投車站（百年木造）至北投公園，路徑全平坦。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 2 -->
+        <section class="day-section" id="day2">
+            <span class="day-label">DAY 02</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">🌸 陽明山花季 & 頂級森林浴</span>
+                    <span class="card-date">Feb 18, 2026 (初二)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">09:00</div>
+                    <div class="event-content">
+                        <span class="event-name">前往陽明山（花鐘區）</span>
+                        <p class="dash-label">初二回娘家車潮巔峰。強力建議預約包車或計程車。</p>
+                        <div class="pill-group">
+                            <span class="pill hot">⚠️ 行車嚴重管制</span>
+                        </div>
+                        <div class="crowd-bar">
+                            <div class="crowd-fill fill-high"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event" style="background: rgba(82,196,26,0.03);">
+                    <div class="event-time">10:30</div>
+                    <div class="event-content">
+                        <span class="event-name">二子坪步道（森林浴首選）</span>
+                        <p class="dash-label">全台環境最友善步道，純平緩路段，無階梯。</p>
+                        <div class="pill-group">
+                            <span class="pill recommend">✨ 養生慢行</span>
+                            <span class="pill recommend">🌳 空氣極佳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">18:00</div>
+                    <div class="event-content">
+                        <span class="event-name">晚餐：二空眷村小館</span>
+                        <p class="dash-label">道地眷村家鄉味，長輩最愛適口性。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 3 -->
+        <section class="day-section" id="day3">
+            <span class="day-label">DAY 03</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">🌅 淡水夕陽 & 頂級名廚盛宴</span>
+                    <span class="card-date">Feb 19, 2026 (初三)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">11:00</div>
+                    <div class="event-content">
+                        <span class="event-name">新上享港式飲茶（2026已確認）</span>
+                        <p class="dash-label">春節正常營業，精選港點，家族圍爐首選。</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">13:30</div>
+                    <div class="event-content">
+                        <span class="event-name">淡水漁人碼頭（避暑觀景）</span>
+                        <p class="dash-label">直接停福容飯店地下室，電梯直達，無需遠行。</p>
+                        <div class="pill-group">
+                            <span class="pill info">📍 最佳撤退：16:15 分</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event" style="background: rgba(192,57,43,0.03);">
+                    <div class="event-time">18:00</div>
+                    <div class="event-content">
+                        <span class="event-name">晚餐：大地酒店 奇岩一號</span>
+                        <p class="dash-label">川湘名菜：剁椒魚頭、稻香牛。此行最高規格總結。</p>
+                        <div class="pill-group">
+                            <span class="pill hot">🏆 必點經典</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 4 -->
+        <section class="day-section" id="day4">
+            <span class="day-label">DAY 04</span>
+            <div class="itinerary-card">
+                <div class="card-header">
+                    <span class="card-title">♨️ 名湯巡禮 & 暖心返程</span>
+                    <span class="card-date">Feb 20, 2026 (初四)</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">11:30</div>
+                    <div class="event-content">
+                        <span class="activity">復興公園泡腳池 (足湯)</span>
+                        <div class="details-group">
+                            <div class="detail-row"><span class="tag tips">體驗</span>北投最高級的免費公立足湯，木造日式氛圍極佳。</div>
+                            <div class="detail-row"><span class="tag transport">便利</span>就在捷運新北投站旁，離停車場也近。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">13:30</div>
+                    <div class="event-content">
+                        <span class="activity">返程：走台 64 線</span>
+                        <div class="details-group">
+                            <div class="detail-row"><span class="tag transport">路線</span>避開市區，快速接往新莊。</div>
+                            <div class="detail-row"><span class="tag alert">時機</span>14:00 前上路，避開初四收假收尾車潮。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 家庭春節專屬導覽 | Designed for Comfort</p>
+            <div class="cny-badge">祝全家 馬年大吉，平安喜樂</div>
+        </footer>
+    </div>
+
+    <!-- Intelligent Bottom Bar -->
+    <nav class="smart-nav">
+        <a href="#day1">17</a>
+        <a href="#day2">18</a>
+        <a href="#day3">19</a>
+        <a href="#day4">20</a>
+        <a href="#top">↑</a>
+    </nav>
+
+    <script>
+        // --- Live Intelligence Logic ---
+
+        // 1. Live Countdown
+        function updateCountdown() {
+            const now = new Date();
+            const cny = new Date('2026-02-17T00:00:00');
+            const diff = cny - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const mins = Math.floor((diff / 1000 / 60) % 60);
+                const secs = Math.floor((diff / 1000) % 60);
+                document.getElementById('countdown-timer').innerText = `${days}d ${hours}h ${mins}m ${secs}s`;
+            } else {
+                document.getElementById('countdown-timer').innerText = "新年快樂！";
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 2. Dynamic Crowd Indicators (Simulated based on hour)
+        function updateCrowdStats() {
+            const hour = new Date().getHours();
+            const dashValue = document.getElementById('crowd-level-dash');
+
+            // Global status
+            if (hour >= 10 && hour <= 19) {
+                dashValue.innerText = "極高";
+                dashValue.style.color = "#ff4d4f";
+            } else if (hour >= 7 || hour <= 22) {
+                dashValue.innerText = "中等";
+                dashValue.style.color = "#faad14";
+            } else {
+                dashValue.innerText = "低";
+                dashValue.style.color = "#52c41a";
+            }
+
+            // Sync all crowd bars with some variations
+            document.querySelectorAll('.crowd-fill').forEach((bar, index) => {
+                let intensity = (hour >= 9 && hour <= 17) ? 80 : 30;
+                intensity += (index * 5); // Just some flavor
+                bar.className = 'crowd-fill ' + (intensity > 75 ? 'fill-high' : intensity > 40 ? 'fill-med' : 'fill-low');
+            });
+        }
+        updateCrowdStats();
+        setInterval(updateCrowdStats, 60000); // Check every minute
+
+        // --- Original UI UX Logic ---
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.day-section').forEach(section => observer.observe(section));
+
+        const navLinks = document.querySelectorAll('.smart-nav a');
+        window.addEventListener('scroll', () => {
+            let current = "";
+            document.querySelectorAll('.day-section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current) && current !== "") {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+/* =============================================
+   CSS Variables - Design System Tokens
+   ============================================= */
+
+:root {
+    /* Primary Colors */
+    --primary: #FF3B30;
+    --primary-gradient: linear-gradient(135deg, #FF3B30 0%, #AF1D1D 100%);
+    --accent: #FFD700;
+
+    /* Background */
+    --bg-base: #f8f9fa;
+
+    /* Glass Morphism */
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-card: rgba(255, 255, 255, 0.85);
+    --blur: 12px;
+
+    /* Typography */
+    --text-main: #1d1d1f;
+    --text-secondary: #86868b;
+
+    /* Shadows */
+    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.04);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+
+    /* Border Radius */
+    --radius: 24px;
+
+    /* Status Colors */
+    --status-hot: #ff4d4f;
+    --status-hot-bg: #fff1f0;
+    --status-hot-border: #ffccc7;
+
+    --status-recommend: #52c41a;
+    --status-recommend-bg: #f6ffed;
+    --status-recommend-border: #b7eb8f;
+
+    --status-info: #1890ff;
+    --status-info-bg: #e6f7ff;
+    --status-info-border: #91d5ff;
+
+    --status-warning: #faad14;
+}

@@ -1,0 +1,124 @@
+/* =============================================
+   Layout Styles - Container, Header, Nav, Footer
+   ============================================= */
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 120px;
+}
+
+/* Header */
+header {
+    padding: 40px 0 20px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.header-sub {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Smart Dashboard */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    margin: 20px 0 35px;
+}
+
+.dash-card {
+    background: var(--glass-card);
+    backdrop-filter: blur(var(--blur));
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-glass);
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dash-card:hover {
+    transform: translateY(-5px);
+}
+
+.dash-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+}
+
+.dash-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Floating Navigation */
+.smart-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 10px 25px;
+    border-radius: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.smart-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 10px 15px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.smart-nav a.active,
+.smart-nav a:hover {
+    color: white;
+    background: var(--primary);
+    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 50px 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.cny-badge {
+    display: inline-block;
+    background: var(--primary-gradient);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-top: 10px;
+}

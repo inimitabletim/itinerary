@@ -1,0 +1,211 @@
+/* =============================================
+   Component Styles - Cards, Events, Pills, Progress
+   ============================================= */
+
+/* Day Section */
+.day-section {
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s ease-out;
+}
+
+.day-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.day-label {
+    display: inline-block;
+    background: var(--primary-gradient);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(255, 59, 48, 0.2);
+}
+
+/* Itinerary Card */
+.itinerary-card {
+    background: var(--glass-card);
+    backdrop-filter: blur(var(--blur));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-glass);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.card-header {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.card-date {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Timeline Events */
+.event {
+    display: flex;
+    padding: 25px 30px;
+    gap: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.event:last-child {
+    border-bottom: none;
+}
+
+.event-time {
+    flex: 0 0 70px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.event-content {
+    flex: 1;
+}
+
+.event-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
+    display: block;
+}
+
+/* Status Pills */
+.pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.pill.hot {
+    background: var(--status-hot-bg);
+    color: var(--status-hot);
+    border-color: var(--status-hot-border);
+}
+
+.pill.recommend {
+    background: var(--status-recommend-bg);
+    color: var(--status-recommend);
+    border-color: var(--status-recommend-border);
+}
+
+.pill.info {
+    background: var(--status-info-bg);
+    color: var(--status-info);
+    border-color: var(--status-info-border);
+}
+
+/* Crowd Indicator Bar */
+.crowd-bar {
+    width: 100%;
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    margin-top: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.crowd-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease, background-color 0.3s ease;
+}
+
+.fill-low {
+    background: var(--status-recommend);
+    width: 25%;
+}
+
+.fill-med {
+    background: var(--status-warning);
+    width: 60%;
+}
+
+.fill-high {
+    background: var(--status-hot);
+    width: 95%;
+}
+
+/* Detail Rows (for Day 3 & 4 content) */
+.details-group {
+    margin-top: 8px;
+}
+
+.detail-row {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.detail-row .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.detail-row .tag.transport {
+    background: var(--status-info-bg);
+    color: var(--status-info);
+}
+
+.detail-row .tag.tips {
+    background: var(--status-recommend-bg);
+    color: var(--status-recommend);
+}
+
+.detail-row .tag.alert {
+    background: var(--status-hot-bg);
+    color: var(--status-hot);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
