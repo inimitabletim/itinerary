@@ -1,44 +1,77 @@
 /* =============================================
-   CSS Variables - Design System Tokens
+   CSS Variables - 現代中式奢華設計系統
+   全平台支援：iOS Safari / Android Chrome / Desktop
    ============================================= */
 
 :root {
-    /* Primary Colors */
-    --primary: #FF3B30;
-    --primary-gradient: linear-gradient(135deg, #FF3B30 0%, #AF1D1D 100%);
-    --accent: #FFD700;
+    /* === 春節主色調 === */
+    --primary: #C41E3A;           /* 中國紅 */
+    --primary-light: #E63950;
+    --primary-dark: #8B0000;
+    --primary-gradient: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
 
-    /* Background */
-    --bg-base: #f8f9fa;
+    /* === 金色系 === */
+    --gold: #D4AF37;              /* 皇家金 */
+    --gold-light: #F5D98E;
+    --gold-dark: #AA8C2C;
+    --gold-gradient: linear-gradient(135deg, #F5D98E 0%, #D4AF37 50%, #AA8C2C 100%);
 
-    /* Glass Morphism */
-    --glass: rgba(255, 255, 255, 0.7);
-    --glass-card: rgba(255, 255, 255, 0.85);
-    --blur: 12px;
+    /* === 背景色 === */
+    --bg-base: #0D0D0D;           /* 深邃黑 */
+    --bg-card: rgba(20, 20, 20, 0.9);
+    --bg-elevated: rgba(30, 30, 30, 0.95);
 
-    /* Typography */
-    --text-main: #1d1d1f;
-    --text-secondary: #86868b;
+    /* === 玻璃態效果 === */
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-card: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(212, 175, 55, 0.2);
+    --blur: 20px;
 
-    /* Shadows */
-    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.04);
-    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    /* === 文字色 === */
+    --text-main: #F5F5F5;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-gold: #D4AF37;
 
-    /* Border Radius */
-    --radius: 24px;
+    /* === 字體系統（全平台支援） === */
+    --font-display: 'LXGW WenKai', 'Noto Serif TC', serif;  /* 標題用 */
+    --font-body: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;  /* 內文用 */
+    --font-number: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;  /* 數字用 */
 
-    /* Status Colors */
-    --status-hot: #ff4d4f;
-    --status-hot-bg: #fff1f0;
-    --status-hot-border: #ffccc7;
+    /* === 陰影系統 === */
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+    --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.1);
 
-    --status-recommend: #52c41a;
-    --status-recommend-bg: #f6ffed;
-    --status-recommend-border: #b7eb8f;
+    /* === 圓角 === */
+    --radius: 20px;
+    --radius-sm: 12px;
+    --radius-lg: 32px;
 
-    --status-info: #1890ff;
-    --status-info-bg: #e6f7ff;
-    --status-info-border: #91d5ff;
+    /* === 狀態色 === */
+    --status-hot: #FF4757;
+    --status-hot-bg: rgba(255, 71, 87, 0.15);
+    --status-hot-border: rgba(255, 71, 87, 0.3);
 
-    --status-warning: #faad14;
+    --status-recommend: #2ED573;
+    --status-recommend-bg: rgba(46, 213, 115, 0.15);
+    --status-recommend-border: rgba(46, 213, 115, 0.3);
+
+    --status-info: #54A0FF;
+    --status-info-bg: rgba(84, 160, 255, 0.15);
+    --status-info-border: rgba(84, 160, 255, 0.3);
+
+    --status-warning: #FFA502;
+    --status-warning-bg: rgba(255, 165, 2, 0.15);
+
+    /* === 動畫時間 === */
+    --transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+    --transition-slow: 0.6s;
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === 祥雲紋理（SVG 內嵌，確保離線可用） === */
+:root {
+    --pattern-cloud: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 45c-8.284 0-15-6.716-15-15 0-4.142 1.686-7.892 4.393-10.607C22.108 16.686 25.858 15 30 15c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15zm0-5c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10z' fill='%23D4AF37' fill-opacity='0.03'/%3E%3C/svg%3E");
 }

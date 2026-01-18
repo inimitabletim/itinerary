@@ -1,124 +1,324 @@
 /* =============================================
-   Layout Styles - Container, Header, Nav, Footer
+   Layout Styles - 現代中式奢華版面
+   全平台支援：iOS / Android / Desktop
    ============================================= */
 
-/* Container */
+/* === 容器 === */
 .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    padding-bottom: 120px;
+    padding-bottom: 140px;
 }
 
-/* Header */
+/* === Header 區域 === */
 header {
-    padding: 40px 0 20px;
+    padding: 50px 0 30px;
     text-align: center;
+    position: relative;
 }
 
-h1 {
-    font-family: 'Outfit', sans-serif;
+/* 燈籠裝飾 */
+header::before,
+header::after {
+    content: '🏮';
+    position: absolute;
+    top: 20px;
     font-size: 2.5rem;
+    animation: lanternSwing 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(255, 100, 100, 0.3));
+}
+
+header::before {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+header::after {
+    right: 10%;
+    animation-delay: 0.5s;
+}
+
+@keyframes lanternSwing {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* 主標題 - 書法風格 */
+h1 {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
     font-weight: 700;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+    text-shadow:
+        0 0 20px rgba(212, 175, 55, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    display: inline-block;
+}
+
+/* 標題裝飾線 */
+h1::before,
+h1::after {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+h1::before {
+    left: -30px;
+}
+
+h1::after {
+    right: -30px;
 }
 
 .header-sub {
+    font-family: var(--font-number);
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
 }
 
-/* Smart Dashboard */
+/* === 智慧儀表板 === */
 .dashboard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 15px;
-    margin: 20px 0 35px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 30px 0 40px;
 }
 
 .dash-card {
-    background: var(--glass-card);
-    backdrop-filter: blur(var(--blur));
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    padding: 18px 12px;
     border-radius: var(--radius);
-    box-shadow: var(--shadow-glass);
     text-align: center;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal) var(--ease-bounce);
+    -webkit-backdrop-filter: blur(var(--blur));
+    backdrop-filter: blur(var(--blur));
+}
+
+/* 卡片金色光暈 */
+.dash-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
 }
 
 .dash-card:hover {
     transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: var(--shadow-gold);
+}
+
+.dash-card:hover::before {
+    opacity: 1;
 }
 
 .dash-value {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.4rem;
+    font-family: var(--font-number);
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--gold);
     display: block;
+    margin-bottom: 4px;
 }
 
 .dash-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     font-weight: 500;
+    letter-spacing: 0.05em;
 }
 
-/* Floating Navigation */
+/* === 浮動導航 === */
 .smart-nav {
     position: fixed;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--bg-elevated);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    padding: 10px 25px;
-    border-radius: 40px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 8px 20px;
+    border-radius: 50px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px var(--glass-border);
     display: flex;
-    gap: 20px;
+    gap: 8px;
     z-index: 1000;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* iPhone 底部安全區域 */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .smart-nav {
+        bottom: calc(20px + env(safe-area-inset-bottom));
+    }
 }
 
 .smart-nav a {
     text-decoration: none;
     color: var(--text-secondary);
+    font-family: var(--font-number);
     font-weight: 600;
-    font-size: 0.85rem;
-    padding: 10px 15px;
-    border-radius: 25px;
-    transition: 0.3s;
+    font-size: 0.9rem;
+    padding: 12px 18px;
+    border-radius: 30px;
+    transition: all var(--transition-normal) var(--ease-bounce);
+    position: relative;
+}
+
+.smart-nav a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    background: var(--gold-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: -1;
 }
 
 .smart-nav a.active,
 .smart-nav a:hover {
-    color: white;
-    background: var(--primary);
-    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+    color: var(--bg-base);
 }
 
-/* Footer */
+.smart-nav a.active::before,
+.smart-nav a:hover::before {
+    opacity: 1;
+}
+
+/* 回頂部按鈕特殊樣式 */
+.smart-nav a[href="#top"] {
+    padding: 12px 14px;
+}
+
+/* === Footer === */
 footer {
     text-align: center;
-    padding: 50px 0;
+    padding: 60px 0 40px;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 30px;
 }
 
 .cny-badge {
     display: inline-block;
-    background: var(--primary-gradient);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-weight: 700;
-    margin-top: 10px;
+    background: var(--gold-gradient);
+    color: var(--bg-base);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 15px;
+    box-shadow: var(--shadow-gold);
+    letter-spacing: 0.1em;
+}
+
+/* === 響應式：平板 === */
+@media (max-width: 768px) {
+    header::before,
+    header::after {
+        font-size: 2rem;
+        top: 10px;
+    }
+
+    header::before { left: 5%; }
+    header::after { right: 5%; }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h1::before,
+    h1::after {
+        display: none;
+    }
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .smart-nav {
+        padding: 6px 12px;
+        gap: 4px;
+    }
+
+    .smart-nav a {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+/* === 響應式：手機 === */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        padding-bottom: 120px;
+    }
+
+    header {
+        padding: 40px 0 20px;
+    }
+
+    header::before,
+    header::after {
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        letter-spacing: 0.05em;
+    }
+
+    .header-sub {
+        font-size: 0.8rem;
+    }
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dash-card {
+        padding: 14px 10px;
+    }
+
+    .dash-value {
+        font-size: 1.2rem;
+    }
+
+    .smart-nav a {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
 }

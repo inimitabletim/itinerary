@@ -1,100 +1,339 @@
 /* =============================================
-   Responsive Styles - Mobile Adaptations
+   Responsive Styles - 現代中式奢華響應式補充
+   全平台支援：iOS Safari / Android Chrome / Desktop
    ============================================= */
 
-@media (max-width: 600px) {
+/* === 超小螢幕（iPhone SE 等） === */
+@media (max-width: 375px) {
+    .container {
+        padding: 12px;
+        padding-bottom: 110px;
+    }
+
+    header {
+        padding: 30px 0 15px;
+    }
+
+    header::before,
+    header::after {
+        font-size: 1.3rem;
+    }
+
     h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        letter-spacing: 0.03em;
+    }
+
+    .header-sub {
+        font-size: 0.7rem;
     }
 
     .dashboard {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .smart-nav {
-        width: 90%;
-        gap: 5px;
-        padding: 10px;
-        bottom: 20px;
-    }
-
-    .smart-nav a {
-        font-size: 0.75rem;
-        padding: 8px 10px;
-    }
-
-    .event {
-        flex-direction: column;
-        gap: 10px;
-        padding: 20px;
-    }
-
-    .event-time {
-        font-size: 1.1rem;
-    }
-
-    .card-header {
-        padding: 20px;
-        flex-direction: column;
-        align-items: flex-start;
         gap: 8px;
     }
 
-    .card-title {
-        font-size: 1.2rem;
-    }
-
-    .card-date {
-        font-size: 0.9rem;
-    }
-
-    .pill {
-        font-size: 0.75rem;
-        padding: 4px 10px;
-    }
-
     .dash-card {
-        padding: 12px;
+        padding: 10px 8px;
     }
 
     .dash-value {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .dash-label {
+        font-size: 0.65rem;
+    }
+
+    .day-label {
+        padding: 5px 14px;
+        font-size: 0.75rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .event-name {
+        font-size: 0.95rem;
+    }
+
+    .pill {
+        padding: 4px 10px;
         font-size: 0.7rem;
+    }
+
+    .smart-nav {
+        padding: 5px 10px;
+        gap: 3px;
+    }
+
+    .smart-nav a {
+        padding: 8px 10px;
+        font-size: 0.75rem;
     }
 }
 
-/* Tablet Styles */
-@media (min-width: 601px) and (max-width: 900px) {
+/* === 大螢幕桌面 === */
+@media (min-width: 1200px) {
     .container {
-        padding: 15px;
+        max-width: 1000px;
+    }
+
+    h1 {
+        font-size: 3.2rem;
+    }
+
+    .dashboard {
+        gap: 16px;
+    }
+
+    .dash-card {
+        padding: 22px 16px;
+    }
+
+    .dash-value {
+        font-size: 1.7rem;
+    }
+
+    .card-header {
+        padding: 28px 32px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .event {
+        padding: 28px 32px;
+    }
+
+    .event-name {
+        font-size: 1.2rem;
+    }
+}
+
+/* === 超寬螢幕 === */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1100px;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    header::before,
+    header::after {
+        font-size: 3rem;
+    }
+}
+
+/* === 橫向模式（手機） === */
+@media (max-height: 500px) and (orientation: landscape) {
+    header {
+        padding: 20px 0 10px;
+    }
+
+    header::before,
+    header::after {
+        display: none;
+    }
+
+    h1 {
+        font-size: 1.6rem;
     }
 
     .dashboard {
         grid-template-columns: repeat(4, 1fr);
+        margin: 15px 0 20px;
+    }
+
+    .day-section {
+        margin-bottom: 25px;
     }
 
     .smart-nav {
-        gap: 15px;
+        bottom: 10px;
+        padding: 5px 12px;
+    }
+
+    .container {
+        padding-bottom: 80px;
     }
 }
 
-/* Print Styles */
-@media print {
-    .smart-nav {
-        display: none;
+/* === 高 DPI 螢幕優化 === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .itinerary-card,
+    .dash-card,
+    .transport-card {
+        border-width: 0.5px;
+    }
+}
+
+/* === 減少動態效果（無障礙） === */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 
     .day-section {
         opacity: 1;
         transform: none;
+    }
+
+    header::before,
+    header::after {
+        animation: none;
+    }
+}
+
+/* === 深色模式加強（已是深色主題，此為微調） === */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-card: rgba(18, 18, 18, 0.95);
+        --bg-elevated: rgba(28, 28, 28, 0.98);
+    }
+}
+
+/* === 列印樣式 === */
+@media print {
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    body::before,
+    body::after {
+        display: none !important;
+    }
+
+    .smart-nav {
+        display: none !important;
+    }
+
+    .day-section {
+        opacity: 1 !important;
+        transform: none !important;
         page-break-inside: avoid;
+        margin-bottom: 20px;
     }
 
     .itinerary-card {
-        box-shadow: none;
-        border: 1px solid #ccc;
+        border: 1px solid #ddd !important;
+        border-radius: 8px !important;
+        page-break-inside: avoid;
+    }
+
+    .itinerary-card::before {
+        background: #333 !important;
+    }
+
+    .card-header {
+        border-bottom: 1px solid #ddd !important;
+    }
+
+    .event {
+        border-bottom: 1px solid #eee !important;
+    }
+
+    .event::before,
+    .event::after {
+        display: none !important;
+    }
+
+    .pill {
+        border: 1px solid currentColor !important;
+        background: transparent !important;
+    }
+
+    .crowd-bar {
+        display: none !important;
+    }
+
+    .dashboard {
+        display: none !important;
+    }
+
+    header::before,
+    header::after {
+        display: none !important;
+    }
+
+    h1 {
+        color: #333 !important;
+    }
+
+    h1::before,
+    h1::after {
+        display: none !important;
+    }
+
+    .transport-card {
+        page-break-inside: avoid;
+    }
+
+    .nav-button {
+        display: none !important;
+    }
+
+    footer {
+        page-break-before: always;
+    }
+
+    .cny-badge {
+        border: 2px solid #333 !important;
+        background: transparent !important;
+        color: #333 !important;
+    }
+}
+
+/* === 觸控裝置優化 === */
+@media (hover: none) and (pointer: coarse) {
+    .itinerary-card:hover,
+    .dash-card:hover,
+    .transport-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-soft);
+    }
+
+    .smart-nav a:hover::before {
+        opacity: 0;
+    }
+
+    .smart-nav a.active::before {
+        opacity: 1;
+    }
+
+    .pill:hover {
+        transform: none;
+    }
+
+    .nav-button:hover {
+        transform: none;
+        box-shadow: var(--shadow-gold);
+    }
+}
+
+/* === 強制色彩模式支援（無障礙） === */
+@media (forced-colors: active) {
+    .itinerary-card,
+    .dash-card,
+    .transport-card {
+        border: 2px solid CanvasText;
+    }
+
+    .pill {
+        border: 1px solid CanvasText;
+    }
+
+    .smart-nav a.active {
+        outline: 2px solid Highlight;
     }
 }
