@@ -9,6 +9,7 @@ import { initWeather, destroyWeather } from './modules/weather.js';
 import { initNavigation, destroyNavigation } from './modules/navigation.js';
 import { initAnimations, destroyAnimations } from './modules/animations.js';
 import { initErrorHandler } from './modules/error-handler.js';
+import { initTransportCards } from './modules/transport.js';
 
 /**
  * Initialize all application modules
@@ -25,6 +26,7 @@ function initApp() {
     initWeather();
     initNavigation();
     initAnimations();
+    initTransportCards();
 
     console.log('✅ App initialized successfully');
 }
