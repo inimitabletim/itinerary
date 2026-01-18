@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh run list:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:inimitabletim.github.io)",
+      "WebSearch",
+      "Bash(winget search:*)",
+      "Bash(winget install:*)",
+      "Bash(git clone:*)",
+      "WebFetch(domain:paddo.dev)",
+      "Bash(claude /plugin)",
+      "WebFetch(domain:blog.devgenius.io)",
+      "WebFetch(domain:claude-plugins.dev)",
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:writing-plans)",
+      "Bash(npm run lint)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node -c:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}
