@@ -9,8 +9,8 @@ export const CONFIG = {
         startDate: '2026-02-17T00:00:00',
         days: [
             { date: '2026-02-17', dayNum: 1, lunar: '初一', title: '關渡祈福 & 三層崎花海' },
-            { date: '2026-02-18', dayNum: 2, lunar: '初二', title: '陽明山花季 & 頂級森林浴' },
-            { date: '2026-02-19', dayNum: 3, lunar: '初三', title: '淡水夕陽 & 頂級名廚盛宴' },
+            { date: '2026-02-18', dayNum: 2, lunar: '初二', title: '淡水夕陽 & 頂級名廚盛宴' },
+            { date: '2026-02-19', dayNum: 3, lunar: '初三', title: '陽明山花季 & 頂級森林浴' },
             { date: '2026-02-20', dayNum: 4, lunar: '初四', title: '名湯巡禮 & 暖心返程' }
         ]
     },
