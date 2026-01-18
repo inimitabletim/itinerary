@@ -1,0 +1,169 @@
+/**
+ * Transport Card Styles
+ * 交通資訊卡片樣式
+ */
+
+/* 主容器 */
+.transport-card {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* 標題列 */
+.transport-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    user-select: none;
+}
+
+/* 推薦標籤 */
+.transport-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.transport-badge.car {
+    background: rgba(52, 152, 219, 0.2);
+    color: #5dade2;
+}
+
+.transport-badge.metro {
+    background: rgba(46, 204, 113, 0.2);
+    color: #58d68d;
+}
+
+.transport-badge.bus {
+    background: rgba(241, 196, 15, 0.2);
+    color: #f4d03f;
+}
+
+/* 展開/收合箭頭 */
+.transport-toggle {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    color: rgba(255,255,255,0.6);
+}
+
+.transport-card.expanded .transport-toggle {
+    transform: rotate(180deg);
+}
+
+/* 詳情區塊 */
+.transport-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.transport-card.expanded .transport-details {
+    max-height: 500px;
+}
+
+/* 各區段 */
+.transport-section {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.transport-section:first-child {
+    border-top: none;
+}
+
+.transport-section h4 {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 資訊文字 */
+.transport-info {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+}
+
+.transport-info p {
+    margin: 0.3rem 0;
+}
+
+.transport-info strong {
+    color: rgba(255,255,255,0.9);
+}
+
+/* 提醒區塊 */
+.transport-note {
+    font-size: 0.8rem;
+    color: #faad14;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(250, 173, 20, 0.1);
+    border-radius: 6px;
+}
+
+/* 導航按鈕 */
+.nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.8rem 1.2rem;
+    background: linear-gradient(135deg, #FF3B30 0%, #FF6B4A 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+}
+
+.nav-button:active {
+    transform: translateY(0);
+}
+
+/* 長輩友善：較大的點擊區域 */
+@media (max-width: 768px) {
+    .transport-header {
+        padding: 0.8rem 0;
+    }
+
+    .transport-badge {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-button {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .transport-info {
+        font-size: 0.9rem;
+    }
+
+    .transport-note {
+        font-size: 0.85rem;
+    }
+}
