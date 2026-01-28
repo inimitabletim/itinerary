@@ -1,25 +1,110 @@
 {
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true",
+    "ENABLE_LSP_TOOL": "true",
+    "FORCE_CLAUDE_VERSION": "2.1.6",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "63999",
+    "MAX_MCP_OUTPUT_TOKENS": "10000",
+    "MAX_THINKING_TOKENS": "31999",
+    "FORCE_AUTOUPDATE_PLUGINS": "true",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "true",
+    "DISABLE_TELEMETRY": "true"
+  },
   "permissions": {
     "allow": [
-      "Bash(gh run list:*)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:inimitabletim.github.io)",
+      "Bash",
+      "Bash(basedpyright:*)",
+      "Bash(cp:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(mypy:*)",
+      "Bash(python tests:*)",
+      "Bash(python:*)",
+      "Bash(pyright:*)",
+      "Bash(pytest:*)",
+      "Bash(rg:*)",
+      "Bash(rm:*)",
+      "Bash(ruff check:*)",
+      "Bash(ruff format:*)",
+      "Bash(uv add:*)",
+      "Bash(uv pip show:*)",
+      "Bash(uv pip:*)",
+      "Bash(uv run:*)",
+      "Edit",
+      "Glob",
+      "Grep",
+      "NotebookEdit",
+      "Read",
+      "TodoWrite",
+      "WebFetch",
       "WebSearch",
-      "Bash(winget search:*)",
-      "Bash(winget install:*)",
-      "Bash(git clone:*)",
-      "WebFetch(domain:paddo.dev)",
-      "Bash(claude /plugin)",
-      "WebFetch(domain:blog.devgenius.io)",
-      "WebFetch(domain:claude-plugins.dev)",
-      "Skill(superpowers:brainstorming)",
-      "Skill(superpowers:writing-plans)",
-      "Bash(npm run lint)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(node -c:*)",
-      "Bash(npm run build:*)",
-      "Bash(npm install:*)"
+      "Write",
+      "mcp__ide__*",
+      "mcp__firecrawl__*",
+      "mcp__plugin_claude-mem_mcp-search__*",
+      "mcp__plugin_context7_context7__*",
+      "Skill(ccp)",
+      "Skill(vexor-cli)",
+      "Skill(plan)",
+      "Skill(implement)",
+      "Skill(verify)",
+      "Skill(setup)",
+      "Skill(spec)"
+    ],
+    "deny": []
+  },
+  "model": "opus",
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /workspaces/itinerary/.claude/hooks/tdd_enforcer.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /workspaces/itinerary/.claude/hooks/file_checker_qlty.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 /workspaces/itinerary/.claude/hooks/file_checker_python.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 /workspaces/itinerary/.claude/hooks/file_checker_ts.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Read|Grep|Glob|Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /workspaces/itinerary/.claude/hooks/context_monitor.py"
+          }
+        ]
+      }
     ]
-  }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "outputStyle": "default",
+  "spinnerTipsEnabled": false,
+  "alwaysThinkingEnabled": true
 }
