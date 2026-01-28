@@ -34,3 +34,15 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Claude CodePro 工具檔案
+.claude.backup.*/
+.claude/bin/
+.claude/commands/
+.claude/config/
+.claude/hooks/
+.claude/installer/
+.claude/skills/
+.claude/statusline.json
+.qlty/
+install-codepro.sh
