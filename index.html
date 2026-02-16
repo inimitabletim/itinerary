@@ -377,51 +377,6 @@
             </div>
         </section>
 
-        <!-- 即時查詢工具 -->
-        <section class="day-section" id="live-tools">
-            <span class="day-label">LIVE</span>
-            <div class="itinerary-card">
-                <div class="card-header">
-                    <span class="card-title">📡 即時查詢工具</span>
-                    <span class="card-date">出發前點一下，掌握最新狀況</span>
-                </div>
-
-                <div class="event">
-                    <div class="event-time">🅿️</div>
-                    <div class="event-content">
-                        <span class="event-name">停車場即時車位</span>
-                        <p class="dash-label">查詢各景點周邊停車場剩餘車位數。</p>
-                        <div class="pill-group">
-                            <a href="https://tpis.pma.gov.taipei/" target="_blank" rel="noopener" class="pill recommend" style="text-decoration: none;">🔍 台北停車資訊</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="event">
-                    <div class="event-time">🚌</div>
-                    <div class="event-content">
-                        <span class="event-name">公車動態到站</span>
-                        <p class="dash-label">查花季專車 124/130/131、紅35 等公車即時到站時間。</p>
-                        <div class="pill-group">
-                            <a href="https://ebus.gov.taipei/" target="_blank" rel="noopener" class="pill recommend" style="text-decoration: none;">🔍 台北公車動態</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="event">
-                    <div class="event-time">🚗</div>
-                    <div class="event-content">
-                        <span class="event-name">即時路況</span>
-                        <p class="dash-label">查台64線、仰德大道、關渡路等即時車流壅塞狀況。</p>
-                        <div class="pill-group">
-                            <a href="https://1968.freeway.gov.tw/" target="_blank" rel="noopener" class="pill recommend" style="text-decoration: none;">🔍 高公局路況</a>
-                            <a href="https://its.taipei/" target="_blank" rel="noopener" class="pill info" style="text-decoration: none;">🔍 台北市路況</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <footer>
             <p>© 2026 家庭春節專屬導覽 | Designed for Comfort</p>
             <div class="cny-badge">祝全家 馬年大吉，平安喜樂</div>
@@ -436,6 +391,118 @@
         <a href="#day4">20</a>
         <a href="#top" aria-label="回到頂部">↑</a>
     </nav>
+
+    <!-- Live Tools FAB -->
+    <div class="fab-container" id="liveFab">
+        <button class="fab-toggle" id="fabToggle" aria-label="即時查詢工具">📡</button>
+        <div class="fab-menu" id="fabMenu">
+            <a href="https://tpis.pma.gov.taipei/" target="_blank" rel="noopener" class="fab-item" aria-label="停車場即時車位">
+                <span class="fab-icon">🅿️</span>
+                <span class="fab-label">停車車位</span>
+            </a>
+            <a href="https://ebus.gov.taipei/" target="_blank" rel="noopener" class="fab-item" aria-label="公車動態到站">
+                <span class="fab-icon">🚌</span>
+                <span class="fab-label">公車到站</span>
+            </a>
+            <a href="https://1968.freeway.gov.tw/" target="_blank" rel="noopener" class="fab-item" aria-label="高公局路況">
+                <span class="fab-icon">🚗</span>
+                <span class="fab-label">即時路況</span>
+            </a>
+            <a href="https://its.taipei/" target="_blank" rel="noopener" class="fab-item" aria-label="台北市路況">
+                <span class="fab-icon">🛣️</span>
+                <span class="fab-label">市區路況</span>
+            </a>
+        </div>
+    </div>
+
+    <style>
+        .fab-container {
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 999;
+        }
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .fab-container {
+                bottom: calc(90px + env(safe-area-inset-bottom));
+            }
+        }
+        .fab-toggle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border, rgba(212, 175, 55, 0.2));
+            background: var(--bg-elevated, #1a1a2e);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fab-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        }
+        .fab-container.open .fab-toggle {
+            transform: rotate(45deg);
+        }
+        .fab-menu {
+            position: absolute;
+            bottom: 62px;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .fab-container.open .fab-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .fab-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: var(--bg-elevated, #1a1a2e);
+            border: 1px solid var(--glass-border, rgba(212, 175, 55, 0.2));
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--text-primary, #e8e0d0);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .fab-item:hover {
+            transform: translateX(-4px);
+            background: rgba(212, 175, 55, 0.1);
+        }
+        .fab-icon {
+            font-size: 1.1rem;
+        }
+        .fab-label {
+            font-weight: 500;
+        }
+    </style>
+
+    <script>
+        document.getElementById('fabToggle').addEventListener('click', function() {
+            document.getElementById('liveFab').classList.toggle('open');
+        });
+        document.addEventListener('click', function(e) {
+            var fab = document.getElementById('liveFab');
+            if (!fab.contains(e.target)) {
+                fab.classList.remove('open');
+            }
+        });
+    </script>
 
     <!-- Application Script -->
     <script type="module" src="src/js/app.js"></script>
