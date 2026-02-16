@@ -105,7 +105,7 @@ export const CONFIG = {
                     duration: '從關渡宮約 15 分鐘',
                     parking: '秀山路旁停車格',
                     parkingFee: '路邊停車費率',
-                    note: '停車位有限，建議 14:00 前抵達',
+                    note: '停車位有限，傍晚時段較好停',
                     coordinates: { lat: 25.1456, lng: 121.4983 }
                 },
                 publicTransport: {
